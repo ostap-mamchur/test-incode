@@ -6,7 +6,6 @@ import {
 import { Role, User } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { UserResponseDto } from './dto/user-response.dto';
-import { CreateUserRequestDto } from './dto/create-user-request.dto';
 
 @Injectable()
 export class UsersService {
@@ -99,8 +98,14 @@ export class UsersService {
     return user;
   }
 
-  async createUser(createUserRequestDto: CreateUserRequestDto): Promise<User> {
-    const user = await this.prisma.user.create({ data: createUserRequestDto });
+  async createUser(
+    username: string,
+    password: string,
+    bossId: string,
+  ): Promise<User> {
+    const user = await this.prisma.user.create({
+      data: { username, password, bossId },
+    });
     return user;
   }
 

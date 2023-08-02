@@ -19,11 +19,11 @@ export class AuthService {
     const saltRounds = +this.configService.get<number>('BCRYPT_SALT_ROUNDS');
     const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-    await this.usersService.createUser({
+    await this.usersService.createUser(
       username,
-      password: hashedPassword,
-      bossId: bossCandidate.id,
-    });
+      hashedPassword,
+      bossCandidate.id,
+    );
   }
 
   async login(user: User) {
