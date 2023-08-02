@@ -30,6 +30,8 @@ async function bootstrap() {
 
   app.useGlobalPipes(new ValidationPipe());
 
-  await app.listen(configService.get<number>('REST_API'));
+  const port = configService.get<number>('REST_PORT');
+
+  await app.listen(port);
 }
 bootstrap();
